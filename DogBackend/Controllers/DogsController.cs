@@ -44,5 +44,16 @@ namespace DogBackend.Controllers
             _context.SaveChanges();
             return Ok(dog);
         }
+        [HttpPost("delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var res = _context.Dogs.FirstOrDefault(x => x.Id == id);
+            if (res != null)
+            {
+                _context.Dogs.Remove(res);
+                _context.SaveChanges();
+            }
+            return Ok();
+        }
     }
 }
